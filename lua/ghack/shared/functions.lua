@@ -6,7 +6,7 @@ local chars = string.Explode("","abcdefghijklmopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 function GHack.RandomPassword()
     local genpw = {}
     for i = 1,8 do
-        table.insert(genpw,table.Random(chars))
+        table.insert(genpw,nil,table.Random(chars))
     end
     genpw = string.Implode("",genpw)
     return genpw
