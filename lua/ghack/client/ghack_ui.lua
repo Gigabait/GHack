@@ -65,8 +65,12 @@ function TablePanel:Init()
     self.top:Dock(TOP)
     self.top:SetTall(28)
     function self.top:Paint(w,h)
-        draw.RoundedBox(0,0,0,w,h,Color(220,220,220))
-        draw.RoundedBox(0,1,1,w-2,h-2,Color(235,235,235))
+        --draw.RoundedBox(0,0,0,w,h,Color(220,220,220))
+        --draw.RoundedBox(0,1,1,w-2,h-2,Color(235,235,235))
+        draw.RoundedBox(0,0,0,30,h,Color(220,220,220))
+        draw.RoundedBox(0,1,1,28,h-2,Color(235,235,235))
+        draw.RoundedBox(0,28,0,346,h,Color(220,220,220))
+        draw.RoundedBox(0,1,1,28,h-2,Color(235,235,235))
     end
 end
 
