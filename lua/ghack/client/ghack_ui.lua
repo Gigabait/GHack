@@ -36,6 +36,12 @@ GHack = {
     Panel = {},
 }
 
+GHack.TestPrograms = {
+    GHack.Programs[1],
+    GHack.Programs[2],
+    GHack.Programs[3],
+}
+
 local MenuButton = {}
 
 function MenuButton:Init()
@@ -58,6 +64,43 @@ end
 
 vgui.Register("ghack_menu_button",MenuButton,"DButton")
 
+local TableRow = {}
+
+function TableRow:Init()
+    self:Dock(TOP)
+    self:SetTall(28)
+
+    self.icon = vgui.Create("DImage",self)
+    self.icon:SetPos(6,6)
+    self.icon:SetSize(16,16)
+    self.icon:SetImage("icon16/error.png")
+
+    self.name = "IM A PROGRAM.exe"
+    self.version = "1.0"
+    self.size = 16
+end
+
+function TableRow:Paint(w,h)
+    --draw.RoundedBox(0,0,0,w,h,Color(220,220,220))
+    --draw.RoundedBox(0,1,1,w-2,h-2,Color(235,235,235))
+    draw.RoundedBox(0,0,0,30,h,Color(220,220,220))
+    draw.RoundedBox(0,1,1,28,h-2,Color(250,250,250))
+    draw.RoundedBox(0,w-274,0,274,h,Color(220,220,220))
+    draw.RoundedBox(0,w-273,1,272,h-2,Color(250,250,250))
+    draw.RoundedBox(0,w-274-169,0,170,h,Color(220,220,220))
+    draw.RoundedBox(0,w-273-169,1,168,h-2,Color(250,250,250))
+    draw.RoundedBox(0,w-274-169-113,0,114,h,Color(220,220,220))
+    draw.RoundedBox(0,w-273-169-113,1,112,h-2,Color(250,250,250))
+    draw.RoundedBox(0,w-274-169-113-448,0,448,h,Color(220,220,220))
+    draw.RoundedBox(0,w-273-169-113-448,1,447,h-2,Color(250,250,250))
+
+    draw.DrawText(self.name,"DermaDefault",w-273-169-113-449/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
+    draw.DrawText(self.version,"DermaDefault",w-273-169-113/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
+    draw.DrawText(self.size.."MB","DermaDefault",w-273-169/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
+end
+
+vgui.Register("ghack_table_row",TableRow,"EditablePanel")
+
 local TablePanel = {}
 
 function TablePanel:Init()
@@ -69,8 +112,19 @@ function TablePanel:Init()
         --draw.RoundedBox(0,1,1,w-2,h-2,Color(235,235,235))
         draw.RoundedBox(0,0,0,30,h,Color(220,220,220))
         draw.RoundedBox(0,1,1,28,h-2,Color(235,235,235))
-        draw.RoundedBox(0,28,0,346,h,Color(220,220,220))
-        draw.RoundedBox(0,1,1,28,h-2,Color(235,235,235))
+        draw.RoundedBox(0,w-274,0,274,h,Color(220,220,220))
+        draw.RoundedBox(0,w-273,1,272,h-2,Color(235,235,235))
+        draw.RoundedBox(0,w-274-169,0,170,h,Color(220,220,220))
+        draw.RoundedBox(0,w-273-169,1,168,h-2,Color(235,235,235))
+        draw.RoundedBox(0,w-274-169-113,0,114,h,Color(220,220,220))
+        draw.RoundedBox(0,w-273-169-113,1,112,h-2,Color(235,235,235))
+        draw.RoundedBox(0,w-274-169-113-448,0,448,h,Color(220,220,220))
+        draw.RoundedBox(0,w-273-169-113-448,1,447,h-2,Color(235,235,235))
+
+        draw.DrawText("Program","DermaDefault",w-273-169-113-449/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
+        draw.DrawText("Version","DermaDefault",w-273-169-113/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
+        draw.DrawText("Size","DermaDefault",w-273-169/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
+        draw.DrawText("Actions","DermaDefault",w-273/2,h/2-6,Color(0,0,0),TEXT_ALIGN_CENTER)
     end
 end
 
@@ -194,6 +248,13 @@ function PANEL:Init()
     local software_table = vgui.Create("ghack_table",softwares)
     software_table:Dock(FILL)
     software_table:DockMargin(15,12,15,12)
+
+    for _,prgm in pairs(GHack.TestPrograms) do
+        local row = vgui.Create("ghack_table_row",software_table)
+        row:Dock(TOP)
+        row.icon:SetImage(prgm.icon)
+        row.name = "Basic "..prgm.type..prgm.ext
+    end
 end
 
 function PANEL:Think()
